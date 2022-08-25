@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Store</title>
+    <link href="./static/mycss.css" th:href="@{/mycss.css}" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+</head>
+<body class="body">
+
+<h1 class="titleRow">Welcome to our book store!</h1>
+<div class="row d-flex justify-content-center">
+    <div class="col-5">
+        <form action="#" th:action="@{/search}" method="post">
+            <div class="input-group mb-3">
+                <input type="text" name="keyword" class="form-control"
+                       placeholder="Search for books by keyword / title">
+                <button type="submit" class="btn btn-primary">
+                    <img th:src="@{/round_search_white_24dp.png}" alt="search">
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="col-1">
+        <a role="button" class="btn btn-primary" href="/viewCart">
+            <img th:src="@{/round_shopping_cart_white_24dp.png}" alt="cart">
+            (<span th:text="${cartSize}"></span>)
+        </a>
+    </div>
+    <div class="col-2">
+        <a role="button" class="btn btn-primary" href="/logout"> Logout
+            <img th:src="@{/round_logout_white_24dp.png}" alt="logout">
+        </a>
+    </div>
+</div>
+
+<h2>Top 5 Discount Books</h2>
+<div th:replace="bookCard.html :: bookCard(field=${discountBooks}, value='store')">
+</div>
+
+</br>
+
+<h2>All Books</h2>
+<div th:replace="bookCard.html :: bookCard(field=${books}, value='store')">
+</div>
+
+
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous">
+</script>

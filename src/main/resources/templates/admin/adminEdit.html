@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Book Store - Admin</title>
+
+    <link href="../static/mycss.css" th:href="@{/mycss.css}" rel="stylesheet"/>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+</head>
+<body class="body">
+<main role="main">
+    <div class="starter-template">
+        <h1 class="titleRow"> Book Store </h1>
+        <div class="d-flex bd-highlight mb-3">
+            <div class="me-auto p-2 bd-highlight"><h2>Hello Admin </h2></div>
+            <div class="p-2 bd-highlight">
+                <a role="button" class="btn btn-primary" href="/logout"> Logout
+                    <img th:src="@{/round_logout_white_24dp.png}" alt="logout">
+                </a>
+            </div>
+            <div class=" p-2 bd-highlight">
+                <a th:href="@{/}" class="btn btn-outline-secondary">
+                    <img th:src="@{/round_home_black_24dp.png}" alt="home">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col md-5">
+            <button class="btn btn-primary" id="addBookBtn" data-bs-toggle="collapse"
+                    data-bs-target="#collapseAddBook"
+                    aria-expanded="true" aria-controls="collapseAddBook">
+                Add Book
+            </button>
+            <div class="collapse show" id="collapseAddBook">
+                <div class="card card-body">
+                    <form action="#" th:action="@{/admin/addBook}" th:object="${book}" method="post">
+                        <span th:insert="admin/bookForm.html :: bookForm "></span>
+                        <button type="submit" class="btn btn-primary">
+                           <img th:src="@{/round_save_white_24dp.png}" alt="save"> Save
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col md-5">
+            <button class="btn btn-primary" id="viewPaymentsBtn" data-bs-toggle="collapse"
+                    data-bs-target="#collapseViewPayments"
+                    aria-expanded="true" aria-controls="collapseViewPayments"> View Payments
+            </button>
+            <div class="collapse show" id="collapseViewPayments">
+                <div th:switch="${payments.size()}" class="col">
+                    <h2 th:case="0">No payments yet!</h2>
+                    <div th:case="*">
+                        <div class="card card-body">
+                            <h6>The total payments are
+                                <span th:text="${totalPayments}"></span>₪
+                            </h6>
+                            <table class="table table-responsive-md">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>User</th>
+                                    <th>Amount</th>
+                                    <th>Date Purchased</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="payment : ${payments}">
+                                    <td th:text="${payment.id}"></td>
+                                    <td th:text="${payment.name}"></td>
+                                    <td>
+                                        <span th:text="${payment.amount}"></span>₪
+                                    </td>
+                                    <td th:text="${payment.dateCreated}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <h2>Books</h2>
+    <div th:replace="bookCard.html :: bookCard(field=${books}, value='admin')">
+    </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous">
+</script>
+</body>
+</html>

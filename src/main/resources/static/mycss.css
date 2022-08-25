@@ -1,0 +1,44 @@
+.titleRow
+{
+    background-color:  #b9e3f9;
+    padding: 1em;
+    text-align: center;
+}
+.body{
+    margin: 2em;
+}
+.bookCard{
+    width: 12rem;
+    margin-right: 1rem;
+    text-align:center;
+}
+.card-img-top{
+    width: 10rem;
+    height: 17rem;
+
+}
+
+small{
+    text-decoration: line-through;
+}
+
+.search{
+    display:  inline-block;
+}
+.book-card-body{
+    display:flex;
+    flex-direction:column;
+    flex:1;
+}
+.card-button-bottom {
+    margin-top: auto;
+}
+
+tr:nth-child(odd) {
+    background-color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #e7f6fd;
+}
+

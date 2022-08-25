@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <link href="./static/mycss.css" th:href="@{/mycss.css}" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+</head>
+<body class="body">
+<h2 class="titleRow">Cart</h2>
+
+<div class="d-flex bd-highlight mb-3">
+    <div class="p-2 bd-highlight">
+        <h3>
+            Total Payment:
+            <span th:text="${totalPay}"></span>₪
+        </h3>
+    </div>
+    <div class="p-2 bd-highlight">
+        <a th:if="${totalPay} > 0" href="#" th:href="@{/pay}" role="button" class="btn btn-primary">
+            <img th:src="@{/round_credit_card_white_24dp.png}" alt="checkout">
+            <span>Checkout</span>
+        </a>
+    </div>
+    <div class="ms-auto p-2 bd-highlight"><a th:href="@{/emptyCart}" class="btn btn-primary">Empty Cart</a>
+    </div>
+    <div class="p-2 bd-highlight">
+        <a th:href="@{/}" class="btn btn-outline-secondary">
+            <img th:src="@{/round_home_black_24dp.png}" alt="home">
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div th:switch="${books.size()}">
+        <h2 th:case="0">The cart is empty!</h2>
+        <div th:case="*">
+            </br>
+            <div class="row md-1">
+                <div class="card bookCard" th:each="element : ${books}"
+                     style="width: 12rem ; margin-right: 1rem ; margin-bottom: 1rem; text-align:center">
+                    <div th:each="book : ${element.key}">
+                        <img th:src="${book.image}" class="card-img-top" alt="book image">
+                        <div class="card-body book-card-body">
+                            <h5 class="card-title" th:text="${book.name}"></h5>
+                            <div>
+                                Price:
+                                <span th:with="result=${book.price - book.price * book.discount / 100}">
+                                    <span th:text="${#numbers.formatDecimal(result,0,'POINT',2,'POINT')}"></span>₪
+                            </span>
+                                <small th:if="${book.discount} > 0">
+                                    <span th:text="${book.price}"></span>₪
+                                </small>
+                            </div>
+                            <br/>
+                            <span th:if="${book.quantity} == 0"> Out of Stock </span>
+                            <span>Quantity: <span th:text="${element.value}"> </span></span>
+                            <div class="card-button-bottom d-flex align-items-end justify-content-center">
+                                <a th:href="@{/removeFromCart/{id}(id=${book.id})}"
+                                   class="btn btn-primary "><i
+                                        class="fas fa-user-times ml-2"></i>Remove
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous">
+</script>
