@@ -43,6 +43,6 @@ automatically from the user's cart.
 
 ## Screenshots
 
-<img src="src/main/resources/static/screenshots/p1.png" width="70%" height="70%">
-<img src="src/main/resources/static/screenshots/p2.png" width="70%" height="70%">
-<img src="src/main/resources/static/screenshots/p3.png" width="70%" height="70%">
+<img src="src/main/resources/static/screenshots/image1.png" width="70%" height="70%">
+<img src="src/main/resources/static/screenshots/image2.png" width="70%" height="70%">
+<img src="src/main/resources/static/screenshots/image3.png" width="70%" height="70%">
